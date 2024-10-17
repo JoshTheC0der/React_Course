@@ -2,6 +2,7 @@ import { SimpleGrid, Skeleton, Text } from '@chakra-ui/react';
 import useGames from '../hooks/useGames';
 import GameCard from './GameCard';
 import GameCardSkeleton from './GameCardSkeleton';
+import GameCardContainer from './GameCardContainer';
 
 const GameGrid = () => {
   // isLoading is a bool designed by Chakra to add animation/functionality to the loading elements
@@ -21,9 +22,15 @@ const GameGrid = () => {
         {/* inner .map('skeleton') is arbitrary and could be any string e.g. .map(beeswax)*/}
         {/* it represents each element inside the skeletons array */}
         {isLoading &&
-          skeletons.map((skeleton) => <GameCardSkeleton key={skeleton} />)}
+          skeletons.map((skeleton) => (
+            <GameCardContainer>
+              <GameCardSkeleton key={skeleton} />
+            </GameCardContainer>
+          ))}
         {games.map((game) => (
-          <GameCard key={game.id} game={game} />
+          <GameCardContainer>
+            <GameCard key={game.id} game={game} />
+          </GameCardContainer>
         ))}
       </SimpleGrid>
     </>
