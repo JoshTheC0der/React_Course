@@ -11,6 +11,7 @@ export interface Genre {
   image_background: string;
 }
 
+// to simulate an error add or remove an x in the '/genres' below
 const useGenres = () => useData<Genre>('/genres');
 
 export default useGenres;

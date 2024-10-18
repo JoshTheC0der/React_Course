@@ -5,13 +5,22 @@ import {
   List,
   ListIcon,
   ListItem,
+  Spinner,
   Text,
 } from '@chakra-ui/react';
 import useGenres from '../hooks/useGenres';
 import getCroppedImageUrl from '../services/image-url';
 
 const GenreList = () => {
-  const { data } = useGenres();
+  const { data, isLoading, error } = useGenres();
+
+  // if error return nothing otherwise in conjunction with all the other error messages
+  // it will become confusing
+  if (error) return null;
+
+  // check if the genre list is loading - return a spinner if it is
+  if (isLoading) return <Spinner></Spinner>;
+
   return (
     <List>
       {data.map((genre) => (
