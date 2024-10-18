@@ -9,7 +9,7 @@ interface Props {
 // and better since if we update this it will automatically change both of those components
 const GameCardContainer = ({ children }: Props) => {
   return (
-    <Box width="300px" borderRadius={10} overflow={'hidden'}>
+    <Box borderRadius={10} overflow={'hidden'}>
       {/* inside the box you need to add children for them to render */}
       {children}
     </Box>
