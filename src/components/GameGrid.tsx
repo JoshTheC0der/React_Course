@@ -1,5 +1,5 @@
 import { SimpleGrid, Skeleton, Text } from '@chakra-ui/react';
-import useGames from '../hooks/useGames';
+import useGames, { Platform } from '../hooks/useGames';
 import GameCard from './GameCard';
 import GameCardSkeleton from './GameCardSkeleton';
 import GameCardContainer from './GameCardContainer';
@@ -8,13 +8,14 @@ import { Genre } from '../hooks/useGenres';
 interface Props {
   // selectedGenre is the name of the property that is set as a property of 'Props' of type Genre or null
   selectedGenre: Genre | null;
+  selectedPlatform: Platform | null;
 }
-const GameGrid = ({ selectedGenre }: Props) => {
+const GameGrid = ({ selectedPlatform, selectedGenre }: Props) => {
   // isLoading is a bool designed by Chakra to add animation/functionality to the loading elements
   // switch it on (true) whilst loading but off once done (false)
 
   // 3. we now pass the selected genre to the 'useGames' hook
-  const { data, error, isLoading } = useGames(selectedGenre);
+  const { data, error, isLoading } = useGames(selectedGenre, selectedPlatform);
   const skeletons = [1, 2, 3, 4, 5, 6];
 
   return (
