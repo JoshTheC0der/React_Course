@@ -16,11 +16,12 @@ interface Props {
 
   // 1. this was to notify the parent of 'GenreList' that a component has been selected
   onSelectGenre: (genre: Genre) => void;
+  selectedGenre: Genre | null;
 }
 
 // 1. this is where you select a genre
 // above you define the function for how to do so - it will be sent to the parent container to then
-const GenreList = ({ onSelectGenre }: Props) => {
+const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
   const { data, isLoading, error } = useGenres();
 
   // if error return nothing otherwise in conjunction with all the other error messages
@@ -45,6 +46,7 @@ const GenreList = ({ onSelectGenre }: Props) => {
             the api automatically links genres to games using unique ID's your job is to only 
             display games that are from the genre clicked */}
             <Button
+              fontWeight={genre.id === selectedGenre?.id ? 'bold' : 'normal'}
               onClick={() => onSelectGenre(genre)}
               fontSize="lg"
               variant={'link'}

@@ -25,7 +25,10 @@ function App() {
         <GridItem area="aside" paddingX={5}>
           {/* 2. this is where we pass the selected genre to the app component
           which causes it to re render - in the next render the selected genre is passed to the game grid */}
-          <GenreList onSelectGenre={(genre) => setSelectedGenre(genre)} />
+          <GenreList
+            selectedGenre={selectedGenre}
+            onSelectGenre={(genre) => setSelectedGenre(genre)}
+          />
         </GridItem>
       </Show>
       <GridItem area="main">
