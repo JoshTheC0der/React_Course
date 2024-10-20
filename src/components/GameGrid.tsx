@@ -4,19 +4,19 @@ import GameCard from './GameCard';
 import GameCardSkeleton from './GameCardSkeleton';
 import GameCardContainer from './GameCardContainer';
 import { Genre } from '../hooks/useGenres';
+import { GameQuery } from '../App';
 
 interface Props {
-  // selectedGenre is the name of the property that is set as a property of 'Props' of type Genre or null
-  selectedGenre: Genre | null;
-  selectedPlatform: Platform | null;
+  gameQuery: GameQuery;
 }
-const GameGrid = ({ selectedPlatform, selectedGenre }: Props) => {
+
+const GameGrid = ({ gameQuery }: Props) => {
   // isLoading is a bool designed by Chakra to add animation/functionality to the loading elements
   // switch it on (true) whilst loading but off once done (false)
 
   // 3. we now pass the selected genre to the 'useGames' hook
-  const { data, error, isLoading } = useGames(selectedGenre, selectedPlatform);
-  const skeletons = [1, 2, 3, 4, 5, 6];
+  const { data, error, isLoading } = useGames(gameQuery);
+  const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
   return (
     <>

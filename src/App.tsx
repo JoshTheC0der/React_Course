@@ -7,12 +7,14 @@ import { Genre } from './hooks/useGenres';
 import PlatformSelector from './components/PlatformSelector';
 import { Platform } from './hooks/useGames';
 
+export interface GameQuery {
+  genre: Genre | null;
+  platform: Platform | null;
+}
 function App() {
   // this below handles the 'state' of when you select a genre - it's initially zero hence (null) in brackets
-
-  const [selectedGenre, setSelectedGenre] = useState<Genre | null>(null);
-  const [selectedPlatform, setSelectedPlatform] = useState<Platform | null>(
-    null
+  const [gameQuery, setSelectedGameQuery] = useState<GameQuery>(
+    {} as GameQuery
   );
 
   return (
@@ -31,21 +33,27 @@ function App() {
           {/* 2. this is where we pass the selected genre to the app component
           which causes it to re render - in the next render the selected genre is passed to the game grid */}
           <GenreList
-            selectedGenre={selectedGenre}
-            onSelectGenre={(genre) => setSelectedGenre(genre)}
+            selectedGenre={gameQuery.genre}
+            onSelectGenre={(genre) =>
+              // what the '{ ...gameQuery, genre }' does is spread the existing game query '...' into a new
+              // object '{}', whilst the ',genre' as a second argument either overwrites (if it already exists)
+              // or adds it (if the gameQuery didn't contain it) thereby resulting in this new object containing
+              // the updated/new 'genre' property which we then set as the 'gameQuery' using the useState
+              // defined above
+              setSelectedGameQuery({ ...gameQuery, genre })
+            }
           />
         </GridItem>
       </Show>
       <GridItem area="main">
         <PlatformSelector
-          selectedPlatform={selectedPlatform}
-          onSelectPlatform={(platform) => setSelectedPlatform(platform)}
+          selectedPlatform={gameQuery.platform}
+          onSelectPlatform={(platform) =>
+            setSelectedGameQuery({ ...gameQuery, platform })
+          }
         />
         {/* 2. this is where the selected genre is passed to the 'GameGrid' */}
-        <GameGrid
-          selectedPlatform={selectedPlatform}
-          selectedGenre={selectedGenre}
-        />
+        <GameGrid gameQuery={gameQuery} />
       </GridItem>
     </Grid>
   );
