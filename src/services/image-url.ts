@@ -1,4 +1,5 @@
 const getCroppedImageUrl = (url: string) => {
+  if (!url) return '';
   const target = 'media/';
   // as indexOf will find the index of the first letter but we want the index of the last symbol so
   // as to start the splicing from after 'media/'

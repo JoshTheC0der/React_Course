@@ -9,14 +9,14 @@ import { Platform } from './hooks/useGames';
 import SortSelector from './components/SortSelector';
 
 export interface GameQuery {
+  // '| null' means it starts as null but once selected will of its type i.e. 'Genre' etc.
   genre: Genre | null;
   platform: Platform | null;
+  sortOrder: string;
 }
 function App() {
-  // this below handles the 'state' of when you select a genre - it's initially zero hence (null) in brackets
-  const [gameQuery, setSelectedGameQuery] = useState<GameQuery>(
-    {} as GameQuery
-  );
+  // this below handles the 'state' of when you select a genre - it's initially zero hence the empty brackets
+  const [gameQuery, setGameQuery] = useState<GameQuery>({} as GameQuery);
 
   return (
     <Grid
@@ -41,7 +41,7 @@ function App() {
               // or adds it (if the gameQuery didn't contain it) thereby resulting in this new object containing
               // the updated/new 'genre' property which we then set as the 'gameQuery' using the useState
               // defined above
-              setSelectedGameQuery({ ...gameQuery, genre })
+              setGameQuery({ ...gameQuery, genre })
             }
           />
         </GridItem>
@@ -51,10 +51,17 @@ function App() {
           <PlatformSelector
             selectedPlatform={gameQuery.platform}
             onSelectPlatform={(platform) =>
-              setSelectedGameQuery({ ...gameQuery, platform })
+              setGameQuery({ ...gameQuery, platform })
             }
           />
-          <SortSelector />
+          <SortSelector
+            sortOrder={gameQuery.sortOrder}
+            onSelectSortOrder={(sortOrder) =>
+              // this passes a new object '{ }' into the 'setGameQuery' function
+              // it spreads the gameQuery object '...' and adds 'sortOrder' c
+              setGameQuery({ ...gameQuery, sortOrder })
+            }
+          />
         </HStack>
         {/* 2. this is where the selected genre is passed to the 'GameGrid' */}
         <GameGrid gameQuery={gameQuery} />
