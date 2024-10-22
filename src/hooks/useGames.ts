@@ -19,10 +19,15 @@ const useGames = (gameQuery: GameQuery) =>
   useData<Game>(
     '/games',
     {
+      // the below 'genres: or search:' are found on the API documentation - I made the mistake of believing
+      // that this part was arbitrary but it is very much not
+      // the docs specify which params are recognised (e.g. 'platforms:') by the API and if you don't use them
+      // (and try and make some names up) your request will be ignored
       params: {
         genres: gameQuery.genre?.id,
         platforms: gameQuery.platform?.id,
         ordering: gameQuery.sortOrder,
+        search: gameQuery.searchText,
       },
     },
 
