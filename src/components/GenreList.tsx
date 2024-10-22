@@ -1,5 +1,6 @@
 import {
   Button,
+  Heading,
   HStack,
   Image,
   List,
@@ -32,31 +33,40 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
   if (isLoading) return <Spinner></Spinner>;
 
   return (
-    <List>
-      {data.map((genre) => (
-        <ListItem key={genre.id} paddingY={'5px'}>
-          <HStack>
-            <Image
-              boxSize={'32px'}
-              borderRadius={8}
-              src={getCroppedImageUrl(genre.image_background)}
-            />
+    <>
+      <Heading fontSize={'2xl'} marginBottom={3}>
+        Genres
+      </Heading>
+      <List>
+        {data.map((genre) => (
+          <ListItem key={genre.id} paddingY={'5px'}>
+            <HStack>
+              <Image
+                boxSize={'32px'}
+                borderRadius={8}
+                objectFit={'cover'}
+                src={getCroppedImageUrl(genre.image_background)}
+              />
 
-            {/* when you console.log genre open Chrome Dev and 'Console' to see the result
-            the api automatically links genres to games using unique ID's your job is to only 
+              {/* when you console.log genre open Chrome Dev and 'Console' to see the result
+            the api automatically links genres to games using unique ID's your job is to only
             display games that are from the genre clicked */}
-            <Button
-              fontWeight={genre.id === selectedGenre?.id ? 'bold' : 'normal'}
-              onClick={() => onSelectGenre(genre)}
-              fontSize="lg"
-              variant={'link'}
-            >
-              {genre.name}
-            </Button>
-          </HStack>
-        </ListItem>
-      ))}
-    </List>
+              <Button
+                // 'whiteSpace' dictates whether components' text wraps around or not
+                whiteSpace={'normal'}
+                textAlign={'left'}
+                fontWeight={genre.id === selectedGenre?.id ? 'bold' : 'normal'}
+                onClick={() => onSelectGenre(genre)}
+                fontSize="lg"
+                variant={'link'}
+              >
+                {genre.name}
+              </Button>
+            </HStack>
+          </ListItem>
+        ))}
+      </List>
+    </>
   );
 };
 
