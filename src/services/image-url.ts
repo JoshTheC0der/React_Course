@@ -1,5 +1,7 @@
+import noImage from '../assets/no-image-placeholder.webp';
+
 const getCroppedImageUrl = (url: string) => {
-  if (!url) return '';
+  if (!url) return noImage;
   const target = 'media/';
   // as indexOf will find the index of the first letter but we want the index of the last symbol so
   // as to start the splicing from after 'media/'
