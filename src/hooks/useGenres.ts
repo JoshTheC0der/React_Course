@@ -2,8 +2,7 @@
 // helps you keep track of things (like data) that CHANGE over time
 // to be used to manipulate life cycles (mounting / unmounting / ) and states (current values of the program)
 
-import useData from './useData';
-
+import genres from '../data/genres';
 // define the shape of how the data fetched will be handled
 export interface Genre {
   id: number;
@@ -12,6 +11,6 @@ export interface Genre {
 }
 
 // to simulate an error add or remove an x in the '/genres' below
-const useGenres = () => useData<Genre>('/genres');
+const useGenres = () => ({ data: genres, isLoading: false, error: null });
 
 export default useGenres;

@@ -27,9 +27,13 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
 
   // if error return nothing otherwise in conjunction with all the other error messages
   // it will become confusing
+
+  // the hardcoded genre list 'genres.ts' made the statement below redundant - I've kept it in for if
+  // I change my code at a later stage
   if (error) return null;
 
   // check if the genre list is loading - return a spinner if it is
+  // the hardcoded genre list 'genres.ts' made the statement below redundant - I've kept it in for if
   if (isLoading) return <Spinner></Spinner>;
 
   return (

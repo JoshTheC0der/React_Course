@@ -24,6 +24,8 @@ const useGames = (gameQuery: GameQuery) =>
       // that this part was arbitrary but it is very much not
       // the docs specify which params are recognised (e.g. 'platforms:') by the API and if you don't use them
       // (and try and make some names up) your request will be ignored
+
+      // this below is the optional 'AxiosRequestConfig' object that is defined in the useData file
       params: {
         genres: gameQuery.genre?.id,
         platforms: gameQuery.platform?.id,
@@ -31,7 +33,7 @@ const useGames = (gameQuery: GameQuery) =>
         search: gameQuery.searchText,
       },
     },
-
+    // this below is the optional dependencies array that is definied in the useData file
     [gameQuery]
   );
 
